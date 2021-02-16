@@ -38,3 +38,13 @@ class Book(models.Model):
     def __str__(self):
         return self.name
     
+class BookComment(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=200)
+    rating = models.FloatField(default=0)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=1)
+
+    def __str__(self):
+        return self.comment
+    
