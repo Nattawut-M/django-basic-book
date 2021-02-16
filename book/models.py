@@ -4,6 +4,9 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name_plural = 'Categories' # changed from 'Categorys' to 'Categories' (plural)
+
     def __str__(self):
         return self.name
     
@@ -35,6 +38,10 @@ class Book(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = 'Book'
+        ordering = ['-created']
+
     def __str__(self):
         return self.name
     
@@ -44,6 +51,10 @@ class BookComment(models.Model):
     rating = models.FloatField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=1)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name_plural = 'Book Comment'
 
     def __str__(self):
         return self.comment
