@@ -7,7 +7,7 @@ class BookCommentStackInline(admin.StackedInline):
     extra = 1
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'price', 'level', 'published']
+    list_display = ['code', 'name', 'price', 'level', 'published', 'show_image']
     list_filter = ['published', 'level', 'category', 'author', 'languages']
     search_fields = ['name']
     date_hierarchy = 'created'

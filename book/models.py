@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.html import format_html
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -31,6 +31,7 @@ class Book(models.Model):
     ]
 
     code = models.IntegerField(blank=False, null=False)
+    image = models.FileField(upload_to='upload/', null=1, blank=1)
     name = models.CharField(max_length=255, blank=False, null=False)
     slug = models.SlugField(max_length=255, blank=False, null=False)
     price = models.FloatField(default=0, null=False, blank=False)
@@ -49,6 +50,14 @@ class Book(models.Model):
     class Meta:
         verbose_name_plural = 'Book'
         ordering = ['-created']
+
+    def show_image(self):
+        if self.image:
+            return format_html('<img src="{}" height="40px"'.format(self.image.url))
+        return ''
+    
+    show_image.allow_tags = True
+    show_image.short_description = 'Image Cover'
 
     def __str__(self):
         return self.name
