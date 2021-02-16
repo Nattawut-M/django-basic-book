@@ -24,10 +24,18 @@ class LanguagesCoding(models.Model):
     
     
 class Book(models.Model):
+    BOOK_LEVEL_CHOICES = [
+        ('B', 'Basic'),
+        ('M', 'Medium'),
+        ('A', 'Advance')
+    ]
+
     code = models.IntegerField(blank=False, null=False)
     name = models.CharField(max_length=255, blank=False, null=False)
     slug = models.SlugField(max_length=255, blank=False, null=False)
     price = models.FloatField(default=0, null=False, blank=False)
+    # Choice
+    level = models.CharField('Level of Book', max_length=20, choices=BOOK_LEVEL_CHOICES, default=BOOK_LEVEL_CHOICES[0][1])
     # relationship
     languages = models.ForeignKey(LanguagesCoding, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ManyToManyField(Category, blank=True)

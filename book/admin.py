@@ -7,8 +7,8 @@ class BookCommentStackInline(admin.StackedInline):
     extra = 1
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'price', 'published']
-    list_filter = ['published', 'category', 'author', 'languages']
+    list_display = ['code', 'name', 'price', 'level', 'published']
+    list_filter = ['published', 'level', 'category', 'author', 'languages']
     search_fields = ['name']
     date_hierarchy = 'created'
     prepopulated_fields = {'slug': ['name']} # auto add 'slug' from 'name
