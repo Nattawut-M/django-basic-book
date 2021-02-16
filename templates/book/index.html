@@ -3,12 +3,39 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <div class="container">
-        <h1>All Book</h1>
-        <ol>
-            {% for i in book %}
-                <li>{{ i }}</li>
-            {% endfor %}
-        </ol>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <h1 class="card-header mb-2">Category</h1>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            All Book
+                        </a>
+                        {% for c in categories %}
+                            <a href="#" class="list-group-item list-group-item-action">{{ c.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h1 class="card-header">Book Store</h1>
+                    {% comment %} <h1>Published Book</h1> {% endcomment %}
+                    <div class="row d-flex justify-content-around">
+                        {% for b in book %}
+                        <div class="card m-1" style="width: 20rem;">
+                            <img src="{{ b.image.url }}" class="card-img-top img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ b.name }}</h5>
+                                <p class="card-text">{{ b.description }}</p>
+                                <a href="#" class="btn btn-info btn-block">Detail</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock content %}
