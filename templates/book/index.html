@@ -3,5 +3,12 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <h1>Index</h1>
+    <div class="container">
+        <h1>All Book</h1>
+        <ol>
+            {% for i in book %}
+                <li>{{ i }}</li>
+            {% endfor %}
+        </ol>
+    </div>
 {% endblock content %}
