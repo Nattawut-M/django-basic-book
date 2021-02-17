@@ -9,26 +9,39 @@
                 <div class="card">
                     <h1 class="card-header mb-2">Category</h1>
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">
+                        <a href="{% url 'book:home' %}" class="list-group-item list-group-item-action {% if not category_id %} active h5 {% endif %}">
                             All Book
                         </a>
                         {% for c in categories %}
-                            <a href="#" class="list-group-item list-group-item-action">{{ c.name }}</a>
+                            <a href="{% url 'book:home' %}?category={{ c.id }}" class="list-group-item list-group-item-action {% if category_id|add:'0' == c.id %} active h5 {% endif %}">{{ c.name }}</a>
                         {% endfor %}
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <h1 class="card-header">Book Store</h1>
+                    <h1 class="card-header">Book Store</h1>1
                     {% comment %} <h1>Published Book</h1> {% endcomment %}
-                    <div class="row d-flex justify-content-around">
+                    <div class="row d-flex justify-content-start p-3">
                         {% for b in book %}
                         <div class="card m-1" style="width: 20rem;">
-                            <img src="{{ b.image.url }}" class="card-img-top img-fluid" alt="...">
+                            {% if b.image %}<img src="{{ b.image.url }}" class="card-img-top img-fluid" alt="book-cover">{% endif %}
                             <div class="card-body">
-                                <h5 class="card-title">{{ b.name }}</h5>
-                                <p class="card-text">{{ b.description }}</p>
+                                <h5 class="card-title"><strong>ชื่อหนังสือ : </strong>{{ b.name }}</h5>
+                                <p class="card-text"><strong>ราคา : </strong>{{ b.price|floatformat:'2'}} บาท</p>
+                                <p class="card-text">
+                                    <strong>ผู้แต่ง : </strong>
+                                    {% for author in b.author.all %}
+                                        <span class="badge badge-secondary">{{ author.name }}</span>
+                                    {% endfor %}
+                                </p>
+                                <p class="card-text">
+                                    <strong>หมวดหมู่ : </strong>
+                                    {% for c in b.category.all %}
+                                        <span class="badge badge-warning text-white">{{ c.name }}</span>
+                                    {% endfor %}
+                                </p>
+                                {% comment %} <p class="card-text">รายละเอียด : {{ b.description }}</p> {% endcomment %}
                                 <a href="#" class="btn btn-info btn-block">Detail</a>
                             </div>
                         </div>
