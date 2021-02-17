@@ -1,7 +1,10 @@
 from django.shortcuts import render
+# import Paginator
 from django.core.paginator import Paginator, InvalidPage, PageNotAnInteger, EmptyPage
 # import Models
 from .models import *
+# import Forms
+from .forms import *
 
 # Create your views here.
 def index(request):
@@ -25,3 +28,8 @@ def index(request):
         book = book_paginator.page(1)
 
     return render(request, 'book/index.html', {'book':book, 'categories': categories, 'category_id':category_id})
+
+def book_add(request):
+    form = BookForm()
+
+    return render(request, 'book/book_add.html', {'form':form})
