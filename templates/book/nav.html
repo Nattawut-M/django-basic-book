@@ -1,6 +1,7 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
     <a class="navbar-brand" href="{% url 'book:home' %}">
-        <img src="" alt="img-logo">
+        <img src="{% static 'img/logo.ico' %}" alt="img-logo" class='img-fluid' style="width: 3rem;">
         Book
     </a>
     
