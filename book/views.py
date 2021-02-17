@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # import Paginator
 from django.core.paginator import Paginator, InvalidPage, PageNotAnInteger, EmptyPage
 # import Models
@@ -7,7 +9,8 @@ from .models import *
 from .forms import *
 #import python-slugify
 from slugify import slugify
-
+# import messages
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -44,5 +47,8 @@ def book_add(request):
             book.save()
             form.save(commit=1)
             form.save_m2m()
-
+            messages.success(request=request, message="Add New Book Success")
+            return HttpResponseRedirect(reverse('book:home',kwargs={}))
+        messages.error(request, 'Something went Wrongs !!')
+        
     return render(request, 'book/book_add.html', {'form':form})

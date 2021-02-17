@@ -9,6 +9,22 @@
 </head>
 <body>
     {% include './nav.html' %}
+
+    {% if messages %}
+    <div class="container">
+        {% for m in messages %}
+            {% if m.tags == 'success' %} {# if messages tags status == 'success' #}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success {{ m }}</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
     {% block content %}{% endblock content %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
