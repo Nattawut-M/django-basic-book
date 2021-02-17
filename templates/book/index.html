@@ -41,7 +41,7 @@
                                         <span class="badge badge-warning text-white">{{ c.name }}</span>
                                     {% endfor %}
                                 </p>
-                                <a href="#" class="btn btn-sm btn-info btn-block">Detail</a>
+                                <a href="{% url 'book:book-detail' b.slug %}" class="btn btn-sm btn-info btn-block">Detail</a>
                             </div>
                         </div>
                         {% endfor %}

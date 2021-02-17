@@ -52,3 +52,7 @@ def book_add(request):
         messages.error(request, 'Something went Wrongs !!')
         
     return render(request, 'book/book_add.html', {'form':form})
+
+def book_detail(request, slug):
+    book = Book.objects.get(slug=slug)
+    return render(request, 'book/book_detail.html', {'slug':slug, 'book':book})
