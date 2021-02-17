@@ -5,6 +5,9 @@ from django.core.paginator import Paginator, InvalidPage, PageNotAnInteger, Empt
 from .models import *
 # import Forms
 from .forms import *
+#import python-slugify
+from slugify import slugify
+
 
 # Create your views here.
 def index(request):
@@ -31,5 +34,15 @@ def index(request):
 
 def book_add(request):
     form = BookForm()
+
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES) 
+        if form.is_valid():
+            book = form.save(commit=0) # insert data to form, but not commit 
+            book.code = Book.objects.all().count() +1
+            book.slug = slugify(book.name)
+            book.save()
+            form.save(commit=1)
+            form.save_m2m()
 
     return render(request, 'book/book_add.html', {'form':form})
