@@ -10,10 +10,16 @@
             <a class="nav-link" href="{% url 'book:home' %}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="/admin">Admin</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" href="{% url 'book:book-add' %}">Add Book</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-success text-white" href="{% url 'book:login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'book:logout' %}">Logout</a>
         </li>
     </ul>
 </nav>

@@ -12,6 +12,10 @@ from slugify import slugify
 # import messages
 from django.contrib import messages
 
+# forms and login, logout
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 # Create your views here.
 def index(request):
     book = Book.objects.all()
@@ -56,3 +60,11 @@ def book_add(request):
 def book_detail(request, slug):
     book = Book.objects.get(slug=slug)
     return render(request, 'book/book_detail.html', {'slug':slug, 'book':book})
+
+def login_view(request):
+    form = AuthenticationForm()
+    return render(request, 'account/login.html', {'form':form})
+
+def logout(request):
+
+    return render(request, 'account/logout.html')
