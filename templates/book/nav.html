@@ -15,11 +15,23 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'book:book-add' %}">Add Book</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link btn btn-outline-success text-white" href="{% url 'book:login' %}">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'book:logout' %}">Logout</a>
+        
+        <li>
+            {% if user.is_authenticated %}
+                <span>{{ request.user.username }}</span>
+                <form action="{% url 'book:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form> 
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-success text-white" href="{% url 'book:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'book:logout' %}">Logout</a>
+                </li>
+            {% endif %} 
+
         </li>
     </ul>
 </nav>

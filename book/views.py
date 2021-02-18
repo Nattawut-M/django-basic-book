@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # import Paginator
@@ -62,9 +62,18 @@ def book_detail(request, slug):
     return render(request, 'book/book_detail.html', {'slug':slug, 'book':book})
 
 def login_view(request):
-    form = AuthenticationForm()
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('book:home')
+    else:
+        form = AuthenticationForm()
+
     return render(request, 'account/login.html', {'form':form})
 
-def logout(request):
-
-    return render(request, 'account/logout.html')
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('book:home')
