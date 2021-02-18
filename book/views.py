@@ -77,3 +77,16 @@ def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('book:home')
+
+def signup_view(request):
+    
+    if request.method == 'POST': # click sign up form
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            newUser = form.save(commit=1)
+            login(request, newUser)
+            return redirect('book:home')
+    else: # if visit by path()
+        form = UserCreationForm()
+
+    return render(request, 'book/signup.html', {'form':form})

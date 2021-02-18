@@ -24,11 +24,11 @@
                     <button type="submit" class="btn btn-danger">Logout</button>
                 </form> 
             {% else %}
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <a class="nav-link btn btn-outline-success text-white" href="{% url 'book:login' %}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'book:logout' %}">Logout</a>
+                    <a class="nav-link btn btn-warning text-white" href="{% url 'book:signup' %}">Sign Up</a>
                 </li>
             {% endif %} 
 
