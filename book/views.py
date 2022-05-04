@@ -25,7 +25,7 @@ def index(request):
     if  category_id:
         book = Book.objects.filter(category=category_id)
 
-    book_paginator = Paginator(book, 3)
+    book_paginator = Paginator(book, 6)
     book_page = request.GET.get('page')
     try:
         book = book_paginator.page(book_page)
